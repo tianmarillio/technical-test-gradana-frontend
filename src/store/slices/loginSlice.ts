@@ -28,14 +28,13 @@ export const loginSlice = createSlice({
         state.loading = true
         state.error = null
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state) => {
         state.loading = false
         state.success = true
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(login.rejected, (state) => {
         state.loading = false
         state.success = false
-        // TODO: pass backend errors
         // state.error = 'Error login';
       }),
 })

@@ -28,14 +28,13 @@ export const registerSlice = createSlice({
         state.loading = true
         state.error = null
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state) => {
         state.loading = false
         state.success = true
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(register.rejected, (state) => {
         state.loading = false
         state.success = false
-        // TODO: pass backend errors
         // state.error = 'Error'
       }),
 })

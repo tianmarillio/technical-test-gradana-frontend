@@ -1,17 +1,16 @@
-import { useAppDispatch } from '@/hooks/useAppDispatch';
-import { useAppSelector } from '@/hooks/useAppSelector';
-import { resetLoginStates } from '@/store/slices/loginSlice';
-import { resetRegisterStates } from '@/store/slices/registerSlice';
-import { register } from '@/store/slices/registerSlice.actions';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { useAppSelector } from '@/hooks/useAppSelector'
+import { resetRegisterStates } from '@/store/slices/registerSlice'
+import { register } from '@/store/slices/registerSlice.actions'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Register = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const success = useAppSelector((state) => state.register.success);
-  const error = useAppSelector((state) => state.register.error);
+  const success = useAppSelector((state) => state.register.success)
+  const error = useAppSelector((state) => state.register.error)
 
   const [payload, setPayload] = useState({
     name: '',
@@ -19,40 +18,40 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
-  });
+  })
 
   useEffect(() => {
     if (!success) {
-      return;
+      return
     }
 
-    navigate('/login');
-  }, [success]);
+    navigate('/login')
+  }, [success, navigate])
 
   useEffect(() => {
     return () => {
       dispatch(resetRegisterStates())
     }
-  }, [])
+  }, [dispatch])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
 
     setPayload({
       ...payload,
       [name]: value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(register(payload));
-  };
+    e.preventDefault()
+    dispatch(register(payload))
+  }
 
   return (
     <div className="container mx-auto grid min-h-screen place-content-center">
       <form
-        className="flex min-h-40 flex-col gap-2 rounded border-4 p-8 w-80"
+        className="flex min-h-40 w-80 flex-col gap-2 rounded border-4 p-8"
         onSubmit={handleSubmit}
       >
         <h1 className="mb-8 text-2xl font-bold">Register</h1>
@@ -121,7 +120,7 @@ const Register = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

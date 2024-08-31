@@ -1,54 +1,54 @@
-import { useAppDispatch } from '@/hooks/useAppDispatch';
-import { useAppSelector } from '@/hooks/useAppSelector';
-import { resetLoginStates } from '@/store/slices/loginSlice';
-import { login } from '@/store/slices/loginSlice.actions';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { useAppSelector } from '@/hooks/useAppSelector'
+import { resetLoginStates } from '@/store/slices/loginSlice'
+import { login } from '@/store/slices/loginSlice.actions'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const accessToken = useAppSelector((state) => state.main.accessToken);
-  const error = useAppSelector((state) => state.login.error);
+  const accessToken = useAppSelector((state) => state.main.accessToken)
+  const error = useAppSelector((state) => state.login.error)
 
   const [payload, setPayload] = useState({
     email: '',
     password: '',
-  });
+  })
 
   useEffect(() => {
     if (!accessToken) {
-      return;
+      return
     }
 
-    navigate('/');
-  }, [accessToken]);
+    navigate('/')
+  }, [accessToken, navigate])
 
   useEffect(() => {
     return () => {
       dispatch(resetLoginStates())
     }
-  }, [])
+  }, [dispatch])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
 
     setPayload({
       ...payload,
       [name]: value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(login(payload));
-  };
+    e.preventDefault()
+    dispatch(login(payload))
+  }
 
   return (
     <div className="container mx-auto grid min-h-screen place-content-center">
       <form
-        className="flex min-h-40 flex-col gap-2 rounded border-4 p-8 w-80"
+        className="flex min-h-40 w-80 flex-col gap-2 rounded border-4 p-8"
         onSubmit={handleSubmit}
       >
         <h1 className="mb-8 text-2xl font-bold">Login</h1>
@@ -90,7 +90,7 @@ const Login = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

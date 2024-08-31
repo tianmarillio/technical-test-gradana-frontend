@@ -7,7 +7,6 @@ import {
   getBalanceHistory,
   getTotalBalance,
 } from '@/store/slices/mainSlice.actions'
-import { formatDateToLocal } from '@/utils/formatDateToLocal'
 import { formatNumberWithCommas } from '@/utils/formatNumberWithCommas'
 import { FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -31,7 +30,7 @@ const Home = () => {
     dispatch(authMe(accessToken))
     dispatch(getTotalBalance(accessToken))
     dispatch(getBalanceHistory(accessToken))
-  }, [accessToken])
+  }, [accessToken, dispatch])
 
   const handleSubmitTopup = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -100,7 +99,7 @@ const Home = () => {
               <div className="mb-2 text-sm font-bold">Date</div>
               <div className="text-sm font-bold">Amount</div>
               {balanceHistory.map((elem, i) => (
-                <BalanceHistory key={i} {...elem}></BalanceHistory>
+                <BalanceHistory key={i} {...elem} />
               ))}
             </div>
           </div>
@@ -111,6 +110,3 @@ const Home = () => {
 }
 
 export default Home
-// TODO: register error detail
-// TODO: login error detail
-// TODO: delete comment & consologs

@@ -1,5 +1,5 @@
 export interface LoginState {
-  loading: boolean;
-  error: string | null;
-  success: boolean;
+  loading: boolean
+  error: string | null
+  success: boolean
 }

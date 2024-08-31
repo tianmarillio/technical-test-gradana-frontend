@@ -12,7 +12,6 @@ interface RegisterPayload {
 export const register = createAsyncThunk(
   'register/register',
   async (payload: RegisterPayload, { dispatch }) => {
-  
     try {
       const response = await api.post<{
         _id: string
